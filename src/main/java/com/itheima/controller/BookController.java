@@ -48,6 +48,7 @@ public class BookController {
     @GetMapping
     public Result getAll() {
         List<Book> bookList = bookService.getAll();
+        int i = 1/0;
         Integer code = bookList != null ? Code.GET_OK : Code.GET_ERR;
         String msg = bookList != null ? "" : "数据查询失败请重试！";
         return new Result(code,bookList,msg);
