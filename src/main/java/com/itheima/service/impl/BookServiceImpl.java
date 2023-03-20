@@ -10,6 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+/**
+ * =========================服务层===============================================
+ */
+
 @Service
 public class BookServiceImpl implements BookService {
 
@@ -18,45 +23,23 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public boolean save(Book book) {
-        bookDao.save(book);
-        return true;
+        return bookDao.save(book) > 0;
     }
 
     @Override
     public boolean update(Book book) {
-        bookDao.update(book);
-        return true;
+       return bookDao.update(book) > 0;
     }
 
     @Override
     public boolean delete(Integer id) {
-        bookDao.delete(id);
-        return true;
+       return bookDao.delete(id) > 0;
     }
 
-    /**
-     ==============================业务层中处理异常的的两种方式===========================
-     */
+
     @Override
     public Book getById(Integer id) {
 
-
-        /**
-         ==============================第一种===========================
-         */
-        if(id == 1){
-            throw new BusinessException(Code.BUSINESS_ERR,"输入错误");
-        }
-        /**
-         ==============================第二种===========================
-         */
-
-        try {
-            int i= 1/0;
-        }catch (Exception e){
-            throw new SystemException(Code.SYSTEM_ERR,"系统异常，请重试");
-
-        }
 
         return bookDao.getById(id);
     }
@@ -66,3 +49,43 @@ public class BookServiceImpl implements BookService {
         return bookDao.getAll();
     }
 }
+
+
+/**
+ * =========================服务层===============================================
+ */
+
+//@Service
+//public class BookServiceImpl implements BookService {
+//
+//    @Autowired
+//    private BookDao bookDao;
+//
+//    @Override
+//    public boolean save(Book book) {
+//        return bookDao.save(book) > 0;
+//    }
+//
+//    @Override
+//    public boolean update(Book book) {
+//        return bookDao.update(book) > 0;
+//    }
+//
+//    @Override
+//    public boolean delete(Integer id) {
+//        return bookDao.delete(id) > 0;
+//    }
+//
+//
+//    @Override
+//    public Book getById(Integer id) {
+//
+//
+//        return bookDao.getById(id);
+//    }
+//
+//    @Override
+//    public List<Book> getAll() {
+//        return bookDao.getAll();
+//    }
+//}
